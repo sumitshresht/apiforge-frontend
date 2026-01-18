@@ -18,6 +18,7 @@ export default function MockRouteManager() {
   const router = useRouter();
   const params = useParams();
   const serverId = params.serverId as string;
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const [server, setServer] = useState<any>(null);
   const [routes, setRoutes] = useState<any[]>([]);
@@ -121,9 +122,9 @@ export default function MockRouteManager() {
                 </div>
                 <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground font-mono">
                     <span className="bg-muted px-1.5 py-0.5 rounded text-[10px] select-all cursor-pointer hover:bg-muted/80 border">
-                        {server?.pathPrefix ? `http://localhost:8080/api/mock/simulator/${server.pathPrefix}` : "Loading..."}
+                        {server?.pathPrefix ? `${API_BASE_URL}/api/mock/simulator/${server.pathPrefix}` : "Loading..."}
                     </span>
-                    <Copy className="h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground" onClick={() => navigator.clipboard.writeText(`http://localhost:8080/api/mock/simulator/${server?.pathPrefix}`)}/>
+                    <Copy className="h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground" onClick={() => navigator.clipboard.writeText(`${API_BASE_URL}/api/mock/simulator/${server?.pathPrefix}`)}/>
                 </div>
             </div>
          </div>

@@ -112,8 +112,9 @@ export default function MockRouteEditor({ routeId, onUpdate }: Props) {
     } catch (e) { alert("Invalid JSON"); }
   };
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const fullUrl = (route && route.mockServer) 
-    ? `http://localhost:8080/api/mock/simulator/${route.mockServer.pathPrefix}${route.path}`
+    ? `${API_BASE_URL}/api/mock/simulator/${route.mockServer.pathPrefix}${route.path}`
     : "Loading endpoint...";
 
   const handleCopyUrl = () => {

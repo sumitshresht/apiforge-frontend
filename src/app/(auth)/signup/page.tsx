@@ -58,7 +58,8 @@ export default function SignupPage() {
     setServerWakingUp(false); // Reset error state
 
     try {
-      const res = await fetch("http://localhost:8080/api/auth/signup", {
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

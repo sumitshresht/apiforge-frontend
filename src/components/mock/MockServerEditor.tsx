@@ -10,6 +10,7 @@ export default function MockServerEditor({ serverId }: { serverId: number }) {
   const { setActiveEditor, setActiveEntityId } = useDashboard();
   const [server, setServer] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+
   
   // Feedback States
   const [saving, setSaving] = useState(false);
@@ -55,7 +56,8 @@ export default function MockServerEditor({ serverId }: { serverId: number }) {
   };
 
   const handleCopyUrl = () => {
-      const url = `http://localhost:8080/api/mock/simulator/${server.pathPrefix}`;
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${API_BASE_URL}/api/mock/simulator/${server.pathPrefix}`;
       navigator.clipboard.writeText(url);
       
       // ✅ Copy Feedback
@@ -65,8 +67,9 @@ export default function MockServerEditor({ serverId }: { serverId: number }) {
 
   if(loading) return <div className="h-full flex items-center justify-center text-muted-foreground"><Loader2 className="h-5 w-5 animate-spin mr-2"/> Loading Server...</div>;
   if(!server) return <div className="p-8 text-muted-foreground">Server not found.</div>;
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const fullUrl = `http://localhost:8080/api/mock/simulator/${server.pathPrefix}`;
+  const fullUrl = `${API_BASE_URL}/api/mock/simulator/${server.pathPrefix}`;
 
   return (
     <div className="h-full flex flex-col bg-background">

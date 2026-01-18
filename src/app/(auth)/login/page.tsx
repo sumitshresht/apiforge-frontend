@@ -62,7 +62,8 @@ export default function LoginPage() {
 
     try {
       // NOTE: Ensure this points to your PROD url in production, not localhost
-      const res = await fetch("http://localhost:8080/api/auth/signin", {
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_BASE_URL}/api/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
